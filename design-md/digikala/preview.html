@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digikala DESIGN.md — Preview</title>
+<style>
+  :root {
+    --primary: #ef4056; --primary-strong: #e6123d; --primary-tonal: #ffe6eb;
+    --secondary: #1672dd;
+    --canvas: #ffffff; --canvas-app: #f2f2f2; --sunken: #f0f0f1;
+    --ink: #0c0c0c; --ink-body: #3f4064; --ink-sec: #62666d; --ink-muted: #81858b;
+    --hairline: #e0e0e2;
+    --success: #4caf50; --success-bg: #e1f9e0; --error: #d32f2f; --warning: #f9a825;
+    --fresh: #05ba58; --plus: #a63489;
+    --r-sm: 4px; --r-md: 8px; --r-lg: 16px; --pill: 9999px;
+    font-size: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Vazirmatn, IRANYekan, Tahoma, sans-serif;
+    background: var(--canvas-app); color: var(--ink);
+    font-size: 1.4rem; line-height: 2.15;
+  }
+  .container { max-width: 1280px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 8px; }
+  h2 { font-size: 1.8rem; font-weight: 700; color: var(--ink); margin: 40px 0 16px; border-right: 4px solid var(--primary); padding-right: 12px; }
+  .meta { color: var(--ink-muted); font-size: 1.2rem; }
+  /* nav */
+  .nav { background: var(--canvas); position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 0 var(--hairline); }
+  .nav-inner { max-width: 1280px; margin: auto; padding: 12px 16px; display: flex; gap: 24px; align-items: center; }
+  .logo { font-weight: 800; font-size: 1.8rem; color: var(--primary); }
+  .search { flex: 1; background: var(--sunken); border-radius: var(--r-md); padding: 10px 16px; color: var(--ink-muted); display:flex; align-items:center; gap:8px;}
+  .cart { background: var(--primary); color: #fff; border-radius: var(--r-md); padding: 10px 20px; font-weight: 700; }
+  /* swatches */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  .swatch { background:#fff; border:1px solid var(--hairline); border-radius: var(--r-md); overflow:hidden; }
+  .swatch .chip { height: 64px; }
+  .swatch .info { padding: 8px 12px; font-size: 1.2rem; }
+  .swatch .hex { direction: ltr; text-align: left; color: var(--ink-sec); font-family: monospace; }
+  /* buttons */
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { padding: 12px 24px; border-radius: var(--r-md); font-size: 1.4rem; font-weight: 700; cursor:pointer; border:none; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-secondary { background: var(--secondary); color: #fff; }
+  .btn-outline { background:#fff; color: var(--primary); border: 1px solid var(--hairline); }
+  .btn-fresh { background: var(--fresh); color: #fff; }
+  .btn-plus { background: var(--plus); color: #fff; }
+  /* type scale */
+  .type-demo > div { padding: 8px 0; border-bottom: 1px dashed var(--hairline); }
+  /* product cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .pcard { background: #fff; border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; transition: box-shadow .2s; position:relative; }
+  .pcard:hover { box-shadow: 0 2px 4px rgba(0,0,0,.12); }
+  .pcard img, .pcard .img-ph { width: 100%; aspect-ratio: 1; object-fit: cover; display:block; }
+  .img-ph { background: linear-gradient(135deg, var(--sunken), #e8e8ea); display:flex; align-items:center; justify-content:center; color:var(--ink-faint); font-size:4rem; }
+  .pcard .body { padding: 12px; }
+  .pcard .title { font-size: 1.3rem; font-weight: 500; color: var(--ink-body); height: 5.6em; overflow:hidden; margin-bottom: 8px; }
+  .rating { color: var(--ink-sec); font-size: 1.2rem; margin-bottom: 6px; }
+  .rating .star { color: #f9bc00; }
+  .price-old { color: var(--ink-muted); text-decoration: line-through; font-size: 1.2rem; }
+  .price-now { font-size: 1.7rem; font-weight: 800; color: var(--ink); }
+  .price-unit { font-size: 1.1rem; color: var(--ink-sec); }
+  .badge-off { position:absolute; top:8px; left:8px; background:var(--primary); color:#fff; border-radius: var(--pill); padding: 2px 10px; font-size: 1.1rem; font-weight:700; }
+  .badge-fresh { position:absolute; top:8px; right:8px; background:var(--fresh); color:#fff; border-radius: var(--r-sm); padding: 2px 8px; font-size: 1rem; }
+  /* chips */
+  .chips { display:flex; gap:8px; flex-wrap:wrap; }
+  .chip { background:#fff; border:1px solid var(--hairline); border-radius: var(--pill); padding: 8px 20px; font-size: 1.3rem; }
+  /* skeleton */
+  .skeleton { background: linear-gradient(90deg, var(--sunken) 25%, #fafafa 50%, var(--sunken) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--r-md); }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  footer { margin-top: 48px; background: var(--canvas-app); border-top: 1px solid var(--hairline); padding: 32px; text-align:center; color: var(--ink-sec); font-size: 1.2rem; }
+  @media (min-width:1024px){ body{font-size:1.4rem;} }
+</style>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner">
+  <span class="logo">دیجی‌کالا</span>
+  <div class="search">🔍 جستجو در دیجی‌کالا...</div>
+  <span class="cart">🛒 سبد خرید</span>
+</div></nav>
+
+<div class="container">
+  <h1>دیجی‌کالا — DESIGN.md Preview</h1>
+  <p class="meta">بازسازی سیستم طراحی دیجی‌کالا بر اساس توکن‌های استخراج‌شده از CSS واقعی سایت · RTL · IRANYekan/Vazirmatn</p>
+
+  <h2>پالت رنگ (Color Tokens)</h2>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#ef4056"></div><div class="info">Primary<br><span class="hex">#ef4056</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#1672dd"></div><div class="info">Secondary<br><span class="hex">#1672dd</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#05ba58"></div><div class="info">Fresh<br><span class="hex">#05ba58</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#a63489"></div><div class="info">Plus<br><span class="hex">#a63489</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#0c0c0c"></div><div class="info">Ink<br><span class="hex">#0c0c0c</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#f0f0f1"></div><div class="info">Sunken<br><span class="hex">#f0f0f1</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#ffe6eb"></div><div class="info">Tonal<br><span class="hex">#ffe6eb</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#e1f9e0"></div><div class="info">Success bg<br><span class="hex">#e1f9e0</span></div></div>
+  </div>
+
+  <h2>دکمه‌ها (Buttons)</h2>
+  <div class="btn-row">
+    <button class="btn btn-primary">افزودن به سبد خرید</button>
+    <button class="btn btn-secondary">ورود | ثبت‌نام</button>
+    <button class="btn btn-outline">مشاهده بیشتر</button>
+    <button class="btn btn-fresh">سفارش فresh</button>
+    <button class="btn btn-plus">اشتراک پلاس</button>
+  </div>
+
+  <h2>مقیاس تایپوگرافی (Type Scale) — line-height ≥ 2.1</h2>
+  <div class="type-demo" style="background:#fff;border:1px solid var(--hairline);border-radius:8px;padding:16px;">
+    <div style="font-size:2.8rem;font-weight:800;">هیرو — ۲۸px / وزن ۸۰۰</div>
+    <div style="font-size:2.2rem;font-weight:700;">تیتر بخش — ۲۲px / وزن ۷۰۰</div>
+    <div style="font-size:1.8rem;font-weight:700;">تیتر کارت — ۱۸px / وزن ۷۰۰</div>
+    <div style="font-size:1.4rem;">متن بدنه — ۱۴px / وزن ۴۰۰ / ارتفاع خط ۲.۱۵ — نمونه متن فارسی برای نمایش خوانایی در ارتفاع خط استاندارد دیجی‌کالا.</div>
+    <div style="font-size:1.2rem;color:var(--ink-sec);">متن ثانویه — ۱۲px</div>
+    <div style="font-size:1.1rem;color:var(--ink-muted);">کپشن — ۱۱px</div>
+  </div>
+
+  <h2>چیپ دسته‌بندی (Category Chips)</h2>
+  <div class="chips">
+    <span class="chip">📱 موبایل</span>
+    <span class="chip">💻 لپ‌تاپ</span>
+    <span class="chip">🎧 هدفون</span>
+    <span class="chip">👟 کفش</span>
+    <span class="chip">📚 کتاب</span>
+    <span class="chip">🧸 اسباب‌بازی</span>
+  </div>
+
+  <h2>کارت محصول (Product Card)</h2>
+  <div class="grid">
+    <div class="pcard">
+      <span class="badge-off">٪۲۵</span>
+      <div class="img-ph">📱</div>
+      <div class="body">
+        <div class="title">گوشی موبایل سامسونگ مدل Galaxy A55 5G دو سیم‌کارت ظرفیت ۲۵۶ گیگابایت و رم ۸ گیگابایت</div>
+        <div class="rating"><span class="star">★</span> ۴.۳ (۱٬۲۵۰ نظر)</div>
+        <span class="price-old">۱۹,۵۰۰,۰۰۰</span>
+        <div><span class="price-now">۱۴,۶۹۰,۰۰۰</span> <span class="price-unit">تومان</span></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <span class="badge-fresh">فروشگاه فresh</span>
+      <div class="img-ph">🥬</div>
+      <div class="body">
+        <div class="title">سبد سبزیجات تازه روزانه — ترکیبی از بهترین سبزی‌های ارگانیک بازار تهران</div>
+        <div class="rating"><span class="star">★</span> ۴.۸ (۳۴۲ نظر)</div>
+        <div><span class="price-now">۱۸۹,۰۰۰</span> <span class="price-unit">تومان</span></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="img-ph">🎧</div>
+      <div class="body">
+        <div class="title">هدفون بی‌سیم سونی مدل WH-1000XM5 با نویز کنسلینگ فعال</div>
+        <div class="rating"><span class="star">★</span> ۴.۶ (۸۹۰ نظر)</div>
+        <div><span class="price-now">۱۸,۲۰۰,۰۰۰</span> <span class="price-unit">تومان</span></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <span class="badge-off">٪۱۰</span>
+      <div class="img-ph">👟</div>
+      <div class="body">
+        <div class="title">کفش پیاده‌روی مردانه نایکی مدل Air Zoom Pegasus 40</div>
+        <div class="rating"><span class="star">★</span> ۴.۱ (۲۱۰ نظر)</div>
+        <span class="price-old">۴,۸۰۰,۰۰۰</span>
+        <div><span class="price-now">۴,۳۲۰,۰۰۰</span> <span class="price-unit">تومان</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Skeleton Loader</h2>
+  <div class="grid">
+    <div><div class="skeleton" style="aspect-ratio:1"></div><div class="skeleton" style="height:14px;margin-top:8px"></div><div class="skeleton" style="height:14px;width:60%;margin-top:4px"></div></div>
+    <div><div class="skeleton" style="aspect-ratio:1"></div><div class="skeleton" style="height:14px;margin-top:8px"></div><div class="skeleton" style="height:14px;width:60%;margin-top:4px"></div></div>
+    <div><div class="skeleton" style="aspect-ratio:1"></div><div class="skeleton" style="height:14px;margin-top:8px"></div><div class="skeleton" style="height:14px;width:60%;margin-top:4px"></div></div>
+  </div>
+</div>
+
+<footer>بازسازی صرفاً برای مقاصد آموزشی/تحلیلی است — تمام توکن‌ها از CSS عمومی سایت digikala.com استخراج شده‌اند.</footer>
+</body>
+</html>
