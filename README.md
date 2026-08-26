@@ -35,9 +35,9 @@ A plain-text design system document that AI agents read to generate consistent U
 |-------|----------|-----------|--------|
 | [Digikala (دیجی‌کالا)](https://digikala.com) | E-commerce marketplace | [design-md/digikala/DESIGN.md](design-md/digikala/DESIGN.md) · [preview](design-md/digikala/preview.html) | ✅ v1 |
 | [Divar (دیوار)](https://divar.ir) | Classifieds / marketplace | [design-md/divar/DESIGN.md](design-md/divar/DESIGN.md) · [preview](design-md/divar/preview.html) | ✅ v1 |
+| [Snapp (اسنپ)](https://snapp.ir) | Super-app / ride-hailing | [design-md/snapp/DESIGN.md](design-md/snapp/DESIGN.md) · [preview](design-md/snapp/preview.html) | ✅ v1 |
 
 ### Requested / Roadmap
-- Snapp (اسنپ) — ride-hailing
 - Cafe Bazaar (کافه‌بازار) — app store
 - Aparat (آپارات) — video platform
 - Torob (ترب) — price comparison

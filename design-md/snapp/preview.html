@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snapp DESIGN.md — Preview (Theme Switcher)</title>
+<style>
+  :root, [data-panda-theme="taxi"] {
+    --primary: #06d170; --primary-dark: #04924e; --tonal: #e6faf1;
+  }
+  [data-panda-theme="food"] { --primary: #ff00a6; --primary-dark: #b30074; --tonal: #ffe6f6; }
+  [data-panda-theme="express"] { --primary: #ff661f; --primary-dark: #b34716; --tonal: #fff3ed; }
+  [data-panda-theme="trip"] { --primary: #ff4340; --primary-dark: #b32f2d; --tonal: #fff0f0; }
+  [data-panda-theme="pay"] { --primary: #008efa; --primary-dark: #0063af; --tonal: #e6f4ff; }
+  [data-panda-theme="club"] { --primary: #ffce00; --primary-dark: #b39000; --tonal: #fffae6; }
+
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family: IRANSansXFaNum, Vazirmatn, Tahoma, sans-serif;
+         background:#fff; color:#252a3c; font-size:14px; line-height:1.9;
+         transition: background .3s; }
+  .container { max-width:1200px; margin:auto; padding:16px; }
+  h1 { font-size:32px; font-weight:700; line-height:1.6; color:#252a3c; }
+  h2 { font-size:20px; font-weight:700; margin:36px 0 14px; line-height:1.7; }
+  .meta { color:#686c79; font-size:12px; }
+  .card { background:#fff; border-radius:8px; box-shadow:
+      0 2px 2px rgba(97,100,117,.06), 0 3px 1px rgba(97,100,117,.04), 0 1px 5px rgba(97,100,117,.12);
+      padding:16px; }
+
+  /* theme switcher */
+  .switcher { display:flex; gap:8px; flex-wrap:wrap; margin:20px 0; padding:16px;
+              border-radius:9999px; background:#ebecf2; align-items:center; }
+  .sw-btn { border:none; cursor:pointer; padding:8px 18px; border-radius:9999px;
+            font-family:inherit; font-size:13px; font-weight:600; background:transparent;
+            color:#686c79; transition: all .25s; }
+  .sw-btn.active { background:#fff; color:var(--primary); box-shadow:
+      0 2px 2px rgba(97,100,117,.06), 0 1px 5px rgba(97,100,117,.12); }
+  .current-theme { font-size:12px; color:#686c79; margin-right:auto; }
+  .current-theme b { color:var(--primary); font-size:14px; }
+
+  /* nav pill */
+  nav { position:sticky; top:0; z-index:10; background:#fff;
+        box-shadow:0 1px 0 rgba(97,100,117,.08); }
+  .nav-inner { max-width:1200px; margin:auto; display:flex; align-items:center; gap:16px; padding:10px 16px; }
+  .logo { font-weight:700; font-size:20px; display:flex; align-items:center; gap:8px; }
+  .logo-dot { width:34px;height:34px;border-radius:50%;background:var(--primary);display:inline-flex;
+              align-items:center;justify-content:center;color:#fff;font-size:18px; transition:.3s;}
+  .search { flex:1; background:#ebecf2; border-radius:9999px; padding:10px 20px; color:#a0a2aa; }
+  .cta { background:var(--primary); color:#fff; border:none; padding:10px 28px;
+         border-radius:9999px; font-family:inherit; font-size:14px; font-weight:600;
+         cursor:pointer; transition:.3s; }
+
+  /* swatches */
+  .swatches { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .sw { background:#fff; border-radius:8px; overflow:hidden; box-shadow:
+        0 2px 2px rgba(97,100,117,.06), 0 1px 5px rgba(97,100,117,.12); }
+  .chip-c { height:56px; }
+  .info { padding:8px 12px; font-size:11px; }
+  .hex { direction:ltr; text-align:left; font-family:monospace; color:#a0a2aa; }
+
+  /* buttons */
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .pill { background:var(--primary); color:#fff; border:none; padding:12px 30px;
+          border-radius:9999px; font-family:inherit; font-size:14px; font-weight:600;
+          cursor:pointer; transition:.3s; }
+  .pill-outline { background:#fff; color:var(--primary); border:1.5px solid var(--primary); }
+  .pill-ghost { background:transparent; color:#686c79; }
+
+  /* type scale */
+  .type-demo > div { padding:6px 0; border-bottom:1px dashed #ebecf2; }
+
+  /* service grid */
+  .services { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px; }
+  .svc { text-align:center; padding:22px 12px; cursor:pointer; }
+  .svc:hover { transform: translateY(-2px); transition:.2s; }
+  .svc .ic { width:52px; height:52px; margin:0 auto 8px; border-radius:50%;
+             display:flex; align-items:center; justify-content:center; font-size:24px;
+             background:var(--tonal); }
+  .svc .nm { font-size:13px; font-weight:600; }
+
+  /* price card */
+  .ride { display:flex; gap:14px; align-items:center; }
+  .ride .map { width:90px; height:70px; border-radius:8px; flex-shrink:0;
+               background:linear-gradient(135deg,#d4f2e4,#b8e6cf); display:flex;align-items:center;justify-content:center;font-size:2rem; }
+  .price { font-weight:700; font-size:17px; }
+  .fanum { font-feature-settings: "ss01"; }
+</style>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+</head>
+<body data-panda-theme="taxi">
+
+<nav><div class="nav-inner">
+  <span class="logo"><span class="logo-dot">🚕</span> اسنپ</span>
+  <div class="search">🔍 جستجوی سرویس...</div>
+  <button class="cta">ورود | ثبت‌نام</button>
+</div></nav>
+
+<div class="container">
+  <h1>تجربه‌ی زندگی راحت‌تر، سریع‌تر و به‌صرفه‌تر با سوپراپلیکیشن اسنپ!</h1>
+  <p class="meta">پیش‌نمایش سیستم طراحی — سوییچ تم زنده بین عمودی‌های اسنپ</p>
+
+  <h2>سوییچر تم زنده (Live Theme Switcher)</h2>
+  <div class="switcher">
+    <button class="sw-btn active" onclick="setTheme('taxi',this)">🚕 تاکسی</button>
+    <button class="sw-btn" onclick="setTheme('food',this)">🍔 غذا</button>
+    <button class="sw-btn" onclick="setTheme('express',this)">📦 اکسپرس</button>
+    <button class="sw-btn" onclick="setTheme('trip',this)">✈️ سفر</button>
+    <button class="sw-btn" onclick="setTheme('pay',this)">💳 اسنپ پی</button>
+    <button class="sw-btn" onclick="setTheme('club',this)">🏆 کلاب</button>
+    <span class="current-theme">تم فعال: <b id="themeName">تاکسی — #06d170</b></span>
+  </div>
+
+  <h2>پالت تم فعلی</h2>
+  <div class="swatches">
+    <div class="sw"><div class="chip-c" style="background:var(--primary)"></div><div class="info">Primary<div class="hex" id="hexPrimary">#06d170</div></div></div>
+    <div class="sw"><div class="chip-c" style="background:var(--primary-dark)"></div><div class="info">Primary Dark<div class="hex" id="hexDark">#04924e</div></div></div>
+    <div class="sw"><div class="chip-c" style="background:var(--tonal)"></div><div class="info">Tonal Wash<div class="hex" id="hexTonal">#e6faf1</span></div></div>
+    <div class="sw"><div class="chip-c" style="background:#252a3c"></div><div class="info">Ink Strongest<div class="hex">#252a3c</div></div></div>
+    <div class="sw"><div class="chip-c" style="background:#ebecf2"></div><div class="info">Sunken<div class="hex">#ebecf2</div></div></div>
+  </div>
+
+  <h2>دکمه‌های Pill</h2>
+  <div class="row">
+    <button class="pill">درخواست سرویس</button>
+    <button class="pill pill-outline">مشاهده جزئیات</button>
+    <button class="pill pill-ghost">بعداً</button>
+  </div>
+
+  <h2>مقیاس تایپوگرافی — IRANSansX FaNum</h2>
+  <div class="type-demo card">
+    <div style="font-size:32px;font-weight:700;">هیرو — ۳۲px / وزن ۷۰۰</div>
+    <div style="font-size:22px;font-weight:700;">تیتر بخش — ۲۲px / وزن ۷۰۰</div>
+    <div style="font-size:17px;font-weight:700;">عنوان کارت — ۱۷px / وزن ۷۰۰</div>
+    <div>متن بدنه — ۱۴px / ارتفاع خط ۱.۹ — قیمت‌ها با ارقام فارسی بومی فونت: <span class="price fanum">۱۲۵٬۰۰۰ تومان</span> بدون نیاز به تبدیل جاوااسکریپتی.</div>
+    <div style="font-size:12px;color:#686c79;">متادیتا — ۱۲px · تهران · ۵ دقیقه پیش</div>
+  </div>
+
+  <h2>گرید سرویس‌ها (Super-App Tiles)</h2>
+  <div class="services">
+    <div class="svc card"><div class="ic">🚕</div><div class="nm">اسنپ تاکسی</div></div>
+    <div class="svc card"><div class="ic">🍔</div><div class="nm">اسنپ فود</div></div>
+    <div class="svc card"><div class="ic">📦</div><div class="nm">اسنپ اکسپرس</div></div>
+    <div class="svc card"><div class="ic">🛒</div><div class="nm">اسنپ مارکت</div></div>
+    <div class="svc card"><div class="ic">💳</div><div class="nm">اسنپ پی</div></div>
+    <div class="svc card"><div class="ic">✈️</div><div class="nm">اسنپ تریپ</div></div>
+    <div class="svc card"><div class="ic">🏥</div><div class="nm">دکتر اسنپ</div></div>
+    <div class="svc card"><div class="ic">🏆</div><div class="nm">اسنپ کلاب</div></div>
+  </div>
+
+  <h2>خلاصه سفر (Ride Summary Card)</h2>
+  <div class="card ride">
+    <div class="map">🗺️</div>
+    <div style="flex:1;">
+      <div style="font-weight:700;">سفر شما به مقصد فرودگاه مهرآباد</div>
+      <div style="color:#686c79;font-size:12px;">تهران · ولنجک → مهرآباد ترمینال ۴ · ۱۵ دقیقه پیش</div>
+    </div>
+    <div style="text-align:left;">
+      <div class="price fanum">۲۴۵٬۰۰۰ تومان</div>
+      <div style="font-size:11px;color:#686c79;">پرداخت با اسنپ پی</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function setTheme(t, btn){
+  document.body.setAttribute('data-panda-theme', t);
+  document.querySelectorAll('.sw-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const cs = getComputedStyle(document.body);
+  const p = cs.getPropertyValue('--primary').trim();
+  const d = cs.getPropertyValue('--primary-dark').trim();
+  document.getElementById('themeName').textContent = t + ' — ' + p;
+  document.getElementById('hexPrimary').textContent = p;
+  document.getElementById('hexDark').textContent = d;
+}
+</script>
+</body>
+</html>
