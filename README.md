@@ -34,10 +34,10 @@ A plain-text design system document that AI agents read to generate consistent U
 | Brand | Category | DESIGN.md | Status |
 |-------|----------|-----------|--------|
 | [Digikala (دیجی‌کالا)](https://digikala.com) | E-commerce marketplace | [design-md/digikala/DESIGN.md](design-md/digikala/DESIGN.md) · [preview](design-md/digikala/preview.html) | ✅ v1 |
+| [Divar (دیوار)](https://divar.ir) | Classifieds / marketplace | [design-md/divar/DESIGN.md](design-md/divar/DESIGN.md) · [preview](design-md/divar/preview.html) | ✅ v1 |
 
 ### Requested / Roadmap
 - Snapp (اسنپ) — ride-hailing
-- Divar (دیوار) — classifieds
 - Cafe Bazaar (کافه‌بازار) — app store
 - Aparat (آپارات) — video platform
 - Torob (ترب) — price comparison

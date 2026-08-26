@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divar DESIGN.md — Preview</title>
+<style>
+  :root {
+    /* semantic tokens — same architecture as divar.ir */
+    --surface-brand-strong: rgb(195,46,46);
+    --content-brand-strong: rgb(195,46,46);
+    --border-brand-strong: rgb(195,46,46);
+    --brand-default: #cd6767;
+    --brand-weak: #fcc9c9; --brand-weakest: #fcf8f8;
+    --canvas: #ffffff; --sunken: #f4f4f5;
+    --ink-strongest: #18181b; --ink-strong: #2a2a30; --ink-body: #52525b;
+    --ink-sec: #71717a; --ink-weak: #a1a1aa; --hairline: #e4e4e7;
+    --positive: #1d7c4d; --positive-bg: #c6f1da;
+    --negative: #c53434; --negative-bg: #fcd9d9;
+    --warning: #bb681a; --warning-bg: #fcdec0;
+    --informative: #3062d4; --informative-bg: #d7e4ff;
+    --grad-ai: linear-gradient(90deg,#5b13f7,#9810d7);
+    --r-sm: 4px; --r-md: 8px;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family: IRANSans, Vazirmatn, Tahoma, sans-serif; background: var(--canvas);
+         color: var(--ink-body); font-size:14px; line-height:2.0; }
+  .container { max-width:1024px; margin:auto; padding:16px; }
+  h1 { color:var(--ink-strongest); font-size:2rem; font-weight:700; line-height:1.75; }
+  h2 { font-size:1.25rem; font-weight:700; color:var(--ink-strong); margin:40px 0 12px;
+       border-right:3px solid var(--content-brand-strong); padding-right:10px; line-height:1.75;}
+  .meta { color:var(--ink-weak); font-size:.75rem; }
+  .ring { box-shadow: inset 0 0 0 1px var(--hairline), inset 0 0 0 1px #fff; }
+
+  nav { position:sticky; top:0; background:#fff; z-index:10; border-bottom:1px solid var(--hairline); }
+  .nav-inner { max-width:1024px; margin:auto; display:flex; align-items:center; gap:16px; padding:12px 16px; }
+  .logo { font-weight:700; font-size:1.25rem; color:var(--content-brand-strong); }
+  .city { display:flex; align-items:center; gap:6px; color:var(--ink-body); font-size:.875rem;
+          padding:8px 12px; border-radius:4px; }
+  .search { flex:1; background:var(--sunken); border-radius:4px; padding:9px 14px; color:var(--ink-weak); font-size:.875rem; }
+  .btn-post { margin-right:auto; background:var(--surface-brand-strong); color:#fff; border:none;
+              padding:10px 20px; border-radius:4px; font-weight:500; font-family:inherit; cursor:pointer;}
+
+  /* swatches */
+  .swatches { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .card { background:#fff; border-radius:4px; overflow:hidden; }
+  .chip-c { height:56px; }
+  .info { padding:8px 12px; font-size:.75rem; }
+  .hex { direction:ltr; text-align:right; color:var(--ink-weak); font-family:monospace; font-size:.7rem; }
+
+  /* buttons */
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .b { padding:10px 18px; border-radius:4px; font-family:inherit; font-size:.875rem; cursor:pointer; }
+  .b-primary { background:var(--surface-brand-strong); color:#fff; border:none; }
+  .b-outline { background:#fff; color:var(--content-brand-strong); border:1px solid var(--border-brand-strong); }
+  .b-ghost { background:transparent; color:var(--ink-sec); border:none; }
+  .b-pos { background:var(--positive-bg); color:var(--positive); border:none; }
+  .b-neg { background:var(--negative-bg); color:var(--negative); border:none; }
+
+  /* type scale */
+  .type-demo > div { padding:6px 0; border-bottom:1px dashed var(--hairline); }
+
+  /* post cards */
+  .posts { display:flex; flex-direction:column; background:#fff; border-radius:4px; overflow:hidden; }
+  .post { display:flex; gap:16px; padding:16px; border-bottom:1px solid var(--hairline); }
+  .thumb { width:120px; height:96px; border-radius:4px; flex-shrink:0; object-fit:cover;
+           display:flex;align-items:center;justify-content:center;font-size:2.5rem;background:linear-gradient(135deg,#ececf0,#e0e0e5);color:var(--ink-weak);}
+  .post-body { flex:1; min-width:0; }
+  .p-title { color:var(--ink-strong); font-weight:700; font-size:1.125rem; line-height:1.75;
+             white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .p-meta { display:flex; gap:8px; color:var(--ink-weak); font-size:.75rem; margin-top:2px; }
+  .p-meta span:not(:last-child)::after { content:"·"; margin-right:8px; color:var(--hairline);}
+  .price-row { margin-top:6px; display:flex; gap:8px; align-items:center; }
+  .price { color:var(--ink-strongest); font-weight:700; font-size:1.125rem; }
+  .tag { font-size:.7rem; padding:1px 8px; border-radius:2px; }
+  .tag-pos { background:var(--positive-bg); color:var(--positive); }
+  .tag-neg { background:var(--negative-bg); color:var(--negative); }
+  .badge-new { background:var(--informative-bg); color:var(--informative); font-size:.65rem; padding:0 6px; border-radius:2px; }
+  .ai-pill { display:inline-flex; align-items:center; gap:4px; font-size:.7rem; padding:1px 8px;
+            border-radius:9999px; color:#fff; background:var(--grad-ai); }
+
+  .chips { display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:8px; }
+  .cat-chip { background:var(--sunken); border-radius:4px; padding:14px 8px; text-align:center; color:var(--ink-body); }
+  .cat-chip .ic { font-size:1.6rem; display:block; margin-bottom:4px; }
+
+  footer { margin-top:48px; padding:32px; text-align:center; color:var(--ink-weak); font-size:.75rem;
+           background:var(--sunken); }
+</style>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <span class="logo">دیوار</span>
+  <span class="city ring">📍 تهران</span>
+  <div class="search">🔍 جستجو در آگهی‌ها...</div>
+  <button class="btn-post">ثبت آگهی</button>
+</div></nav>
+
+<div class="container">
+  <h1>دیوار — DESIGN.md Preview</h1>
+  <p class="meta">بازسازی سیستم طراحی دیوار بر اساس توکن‌های semantic استخراج‌شده از CSS واقعی · RTL · IRANSans/Vazirmatn</p>
+
+  <h2>توکن‌های رنگ (Semantic Color Tokens)</h2>
+  <div class="swatches">
+    <div class="card"><div class="chip-c" style="background:#c32e2e"></div><div class="info">Brand Strong<div class="hex">rgb(195,46,46)</div></div></div>
+    <div class="card"><div class="chip-c" style="background:#cd6767"></div><div class="info">Brand Default<div class="hex">rgb(205,103,103)</div></div></div>
+    <div class="card"><div class="chip-c" style="background:linear-gradient(90deg,#5b13f7,#9810d7)"></div><div class="info">Assistive (AI)<div class="hex">#5b13f7→#9810d7</div></div></div>
+    <div class="card"><div class="chip-c" style="background:#1d7c4d"></div><div class="info">Positive<div class="hex">#1d7c4d</div></div></div>
+    <div class="card"><div class="chip-c" style="background:#c53434"></div><div class="info">Negative<div class="hex">#c53434</div></div></div>
+    <div class="card"><div class="chip-c" style="background:#bb681a"></div><div class="info">Warning<div class="hex">#bb681a</div></div></div>
+    <div class="card"><div class="chip-c" style="background:#3062d4"></div><div class="info">Informative<div class="hex">#3062d4</div></div></div>
+    <div class="card"><div class="chip-c" style="background:#f4f4f5;border:1px solid var(--hairline)"></div><div class="info">Sunken<div class="hex">#f4f4f5</div></div></div>
+  </div>
+
+  <h2>دکمه‌ها</h2>
+  <div class="row">
+    <button class="b b-primary">ثبت آگهی</button>
+    <button class="b b-outline">تماس با فروشنده</button>
+    <button class="b b-ghost">گزارش تخلف</button>
+    <span class="b b-pos" style="cursor:default">توافقی</span>
+    <span class="b b-neg" style="cursor:default">فروخته شد</span>
+    <span class="ai-pill">✨ پیشنهاد هوشمند عنوان</span>
+  </div>
+
+  <h2>مقیاس تایپوگرافی — line-height: 2.0</h2>
+  <div class="type-demo ring" style="padding:16px;border-radius:4px;">
+    <div style="font-size:2rem;font-weight:700;color:var(--ink-strongest)">هیرو — ۳۲px / وزن ۷۰۰ / lh ۱.۷۵</div>
+    <div style="font-size:1.25rem;font-weight:700;color:var(--ink-strong)">تیتر بخش — ۲۰px / وزن ۷۰۰</div>
+    <div style="font-size:1.125rem;font-weight:700;color:var(--ink-strong)">عنوان آگهی — ۱۸px / وزن ۷۰۰</div>
+    <div>متن بدنه — ۱۶px / lh ۲.۰ — نمونه متن فارسی برای نمایش خوانایی در ارتفاع خط استاندارد دیوار که دو برابر اندازه فونت است.</div>
+    <div style="font-size:.875rem;">متن اصلی — ۱۴px / رایج‌ترین سایز (x77)</div>
+    <div style="font-size:.75rem;color:var(--ink-sec)">متادیتا — ۱۲px · تهران، نیاوران · ۳ ساعت پیش</div>
+  </div>
+
+  <h2>چیپ دسته‌بندی (Category Tiles)</h2>
+  <div class="chips">
+    <div class="cat-chip"><span class="ic">🚗</span>وسایل نقلیه</div>
+    <div class="cat-chip"><span class="ic">🏠</span>املاک</div>
+    <div class="cat-chip"><span class="ic">📱</span>موبایل</div>
+    <div class="cat-chip"><span class="ic">💻</span>کامپیوتر</div>
+    <div class="cat-chip"><span class="ic">🛋️</span>خانه و آشپزخانه</div>
+    <div class="cat-chip"><span class="ic">👔</span>خدمات</div>
+    <div class="cat-chip"><span class="ic">💼</span>کار و استخدام</div>
+    <div class="cat-chip"><span class="ic">🐕</span>حیوانات</div>
+  </div>
+
+  <h2>کارت آگهی (Post Card) — لیست عمودی</h2>
+  <div class="posts ring" style="border-radius:4px;">
+    <div class="post">
+      <div class="thumb">🚗</div>
+      <div class="post-body">
+        <div class="p-title">پژو ۲۰۶ تیپ ۵ مدل ۹۸ بی‌رنگ بیمه کامل <span class="badge-new">جدید</span></div>
+        <div class="p-meta"><span>تهران</span><span>پونک</span><span>۲ ساعت پیش</span></div>
+        <div class="price-row"><span class="price">۴۸۵٬۰۰۰٬۰۰۰ تومان</span></div>
+      </div>
+    </div>
+    <div class="post">
+      <div class="thumb">🏠</div>
+      <div class="post-body">
+        <div class="p-title">آپارتمان ۸۵ متری نوساز با پارکینگ، طبقه سوم، آسانسور دارد</div>
+        <div class="p-meta"><span>تهران</span><span>سعادت‌آباد</span><span>۵ ساعت پیش</span></div>
+        <div class="price-row"><span class="price">۲۸٬۵۰۰ میلیون تومان</span><span class="tag tag-pos">توافقی</span></div>
+      </div>
+    </div>
+    <div class="post">
+      <div class="thumb">📱</div>
+      <div class="post-body">
+        <div class="p-title">آیفون ۱۳ پرو مکس ۲۵۶ گیگ کاملاً سالم با کارتن و لوازم ✨ <span class="ai-pill">✨ توضیحات AI</span></div>
+        <div class="p-meta"><span>تهران</span><span>جردن</span><span>دیروز</span></div>
+        <div class="price-row"><span class="price">۶۲٬۰۰۰٬۰۰۰ تومان</span><span class="tag tag-neg">فروخته شد</span></div>
+      </div>
+    </div>
+    <div class="post" style="border-bottom:none;">
+      <div class="thumb">🛋️</div>
+      <div class="post-body">
+        <div class="p-title">مبل راحتی هفت نفره طوسی، تحویل فوری، تقریباً نو</div>
+        <div class="p-meta"><span>کرج</span><span>گوهردشت</span><span>۲ روز پیش</span></div>
+        <div class="price-row"><span class="price">۱۸٬۷۰۰٬۰۰۰ تومان</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>بازسازی صرفاً برای مقاصد آموزشی/تحلیلی — تمام توکن‌ها از CSS عمومی سایت divar.ir استخراج شده‌اند.</footer>
+</body>
+</html>
